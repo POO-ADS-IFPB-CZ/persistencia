@@ -2,10 +2,7 @@ package dao;
 
 import model.Produto;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,8 +21,16 @@ public class ProdutoDao {
         }
     }
 
-    public boolean adicionarProduto(Produto produto){
-        return produtos.add(produto);
+    public boolean adicionarProduto(Produto produto) throws IOException,
+            ClassNotFoundException {
+        Set<Produto> produtos = getProdutos();
+        if(produtos.add(produto)){
+            try(ObjectOutputStream out = new ObjectOutputStream(
+                    new FileOutputStream(arquivo))){
+                out.writeObject(produtos);
+            }
+        }
+        return false;
     }
 
     public Set<Produto> getProdutos() throws IOException,

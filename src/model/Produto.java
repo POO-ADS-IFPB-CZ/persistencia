@@ -6,12 +6,14 @@ import java.util.Objects;
 
 public class Produto implements Serializable {
 
+    private final long serialVersionUID;
     private int id;
     private String descricao;
     private float preco;
     private LocalDate validade;
 
     public Produto(int id, String descricao, float preco, LocalDate validade) {
+        this.serialVersionUID = 1L;
         this.id = id;
         this.descricao = descricao;
         this.preco = preco;

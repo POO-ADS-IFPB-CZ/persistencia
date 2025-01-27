@@ -16,6 +16,10 @@ public class Main {
 //            dao.adicionarProduto(new Produto(2, "Café",
 //                    20f, LocalDate.of(2025,
 //                    10,8)));
+
+//            dao.removerProduto(new Produto(2, null,
+//                    0, null));
+
             System.out.println(dao.getProdutos());
         } catch (IOException e) {
             throw new RuntimeException(e);

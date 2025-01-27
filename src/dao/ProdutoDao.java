@@ -33,6 +33,18 @@ public class ProdutoDao {
         return false;
     }
 
+    public boolean removerProduto(Produto produto) throws IOException,
+            ClassNotFoundException {
+        Set<Produto> produtos = getProdutos();
+        if(produtos.remove(produto)){
+            try(ObjectOutputStream out = new ObjectOutputStream(
+                    new FileOutputStream(arquivo))){
+                out.writeObject(produtos);
+            }
+        }
+        return false;
+    }
+
     public Set<Produto> getProdutos() throws IOException,
             ClassNotFoundException {
         if(arquivo.length()==0){

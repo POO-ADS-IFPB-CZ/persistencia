@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Produto {
+public class Produto implements Serializable {
 
     private int id;
     private String descricao;

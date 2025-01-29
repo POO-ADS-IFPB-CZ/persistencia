@@ -41,6 +41,18 @@ public class ProdutoDao {
         return false;
     }
 
+    public boolean atualizar(Produto produto) throws IOException,
+            ClassNotFoundException {
+        Set<Produto> produtos = getProdutos();
+        if(produtos.contains(produto)){
+            if(produtos.remove(produto) && produtos.add(produto)){
+                atualizarArquivo(produtos);
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void atualizarArquivo(Set<Produto> produtos)
             throws IOException {
         try(ObjectOutputStream out = new ObjectOutputStream(

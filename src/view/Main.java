@@ -21,6 +21,8 @@ public class Main {
 //                    0, null));
 
             System.out.println(dao.getProdutos());
+//            dao.atualizar(new Produto(2, "Cafe Santa Clara",
+//                    15, LocalDate.of(2025,10,3)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

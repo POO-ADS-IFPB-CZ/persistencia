@@ -1,17 +1,20 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Main {
     public static void main(String[] args) {
-        ImageIcon icon = new ImageIcon("img/logo.png");
-        String tipos[] = {"Alimentício", "Limpeza", "Higiene"};
-        int retorno = JOptionPane.showOptionDialog(
-                null, "Selecione a opção",
-                "Escolha", JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, icon,
-                tipos, tipos[0]
-                );
-        System.out.println(retorno);
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setApproveButtonText("OK");
+        FileNameExtensionFilter filter = new
+                FileNameExtensionFilter("Imagens",
+                "png", "bmp", "jpg", "jpeg", "gif");
+        chooser.setFileFilter(filter);
+        int retorno = chooser.showOpenDialog(null);
+        if(retorno == JFileChooser.APPROVE_OPTION){
+            System.out.println(chooser.getSelectedFile().length());
+        }
     }
 }

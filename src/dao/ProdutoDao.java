@@ -27,10 +27,7 @@ public class ProdutoDao {
             ClassNotFoundException {
         Set<Produto> produtos = getProdutos();
         if(produtos.add(produto)){
-            try(ObjectOutputStream out = new ObjectOutputStream(
-                    new FileOutputStream(arquivo))){
-                out.writeObject(produtos);
-            }
+            atualizarArquivo(produtos);
         }
         return false;
     }
@@ -39,12 +36,17 @@ public class ProdutoDao {
             ClassNotFoundException {
         Set<Produto> produtos = getProdutos();
         if(produtos.remove(produto)){
-            try(ObjectOutputStream out = new ObjectOutputStream(
-                    new FileOutputStream(arquivo))){
-                out.writeObject(produtos);
-            }
+            atualizarArquivo(produtos);
         }
         return false;
+    }
+
+    private void atualizarArquivo(Set<Produto> produtos)
+            throws IOException {
+        try(ObjectOutputStream out = new ObjectOutputStream(
+                new FileOutputStream(arquivo))){
+            out.writeObject(produtos);
+        }
     }
 
     public Set<Produto> getProdutos() throws IOException,

@@ -28,6 +28,7 @@ public class ProdutoDao {
         Set<Produto> produtos = getProdutos();
         if(produtos.add(produto)){
             atualizarArquivo(produtos);
+            return true;
         }
         return false;
     }

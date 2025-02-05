@@ -1,10 +1,14 @@
 package view;
 
+import dao.ProdutoDao;
 import model.Produto;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.text.ParseException;
 import java.time.LocalDate;
 
 public class TelaCadastroProduto extends JDialog {
@@ -15,10 +19,12 @@ public class TelaCadastroProduto extends JDialog {
     private JTextField campoCodigo;
     private JTextField campoDescricao;
     private JTextField campoPreco;
-    private JTextField campoValidade;
     private JButton listarButton;
+    private JFormattedTextField formattedTextField1;
+    private ProdutoDao produtoDao;
 
     public TelaCadastroProduto() {
+        produtoDao = new ProdutoDao();
         setContentPane(contentPane);
         setModal(true);
         setTitle("Cadastro de Produtos");
@@ -28,17 +34,48 @@ public class TelaCadastroProduto extends JDialog {
         buttonOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String codigoString = campoCodigo.getText();
-                int codigo = Integer.parseInt(codigoString);
-                String descricao = campoDescricao.getText();
-                String precoString = campoPreco.getText();
-                float preco = Float.parseFloat(precoString);
-                String validadeString = campoValidade.getText();
-                LocalDate validade = LocalDate.parse(validadeString);
-                Produto produto = new Produto(codigo, descricao, preco,
-                        validade);
-                System.out.println(produto);
+                if(validarCampos()){
+                    String codigoString = campoCodigo.getText();
+                    int codigo = Integer.parseInt(codigoString);
+                    String descricao = campoDescricao.getText();
+                    String precoString = campoPreco.getText();
+                    float preco = Float.parseFloat(precoString);
+                    String validadeString = formattedTextField1.getText();
+                    LocalDate validade = LocalDate.parse(validadeString);
+                    Produto produto = new Produto(codigo, descricao, preco,
+                            validade);
 
+                    try {
+                        if(produtoDao.adicionarProduto(produto)){
+                            JOptionPane.showMessageDialog(null,
+                                    "Salvo com sucesso");
+                        }else{
+                            JOptionPane.showMessageDialog(null,
+                                    "Código já existente");
+                        }
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(null,
+                                "Falha na conexão com arquivo");
+                    } catch (ClassNotFoundException ex) {
+                        JOptionPane.showMessageDialog(null,
+                                "Falha na conexão com arquivo");
+                    }
+
+                }
+
+            }
+
+            private boolean validarCampos() {
+                //TODO: Validar os outros campos
+                if(campoCodigo.getText().isEmpty() ||
+                        campoDescricao.getText().isEmpty() ||
+                        formattedTextField1.getText().isEmpty() ||
+                        campoPreco.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null,
+                            "Preencha todos os campos");
+                    return false;
+                }
+                return true;
             }
         });
         listarButton.addActionListener(new ActionListener() {
@@ -53,6 +90,15 @@ public class TelaCadastroProduto extends JDialog {
     }
 
     private void createUIComponents() {
+        formattedTextField1 = new JFormattedTextField();
+        try {
+            MaskFormatter formatter = new MaskFormatter("####-##-##");
+            formatter.install(formattedTextField1);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+
         ImageIcon icon = new ImageIcon("img/supermercado.png");
         label1 = new JLabel();
         label1.setIcon(icon);

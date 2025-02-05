@@ -16,6 +16,7 @@ public class TelaCadastroProduto extends JDialog {
     private JTextField campoDescricao;
     private JTextField campoPreco;
     private JTextField campoValidade;
+    private JButton listarButton;
 
     public TelaCadastroProduto() {
         setContentPane(contentPane);
@@ -34,20 +35,12 @@ public class TelaCadastroProduto extends JDialog {
                 float preco = Float.parseFloat(precoString);
                 String validadeString = campoValidade.getText();
                 LocalDate validade = LocalDate.parse(validadeString);
-
                 Produto produto = new Produto(codigo, descricao, preco,
                         validade);
                 System.out.println(produto);
 
             }
         });
-    }
-
-    public static void main(String[] args) {
-        TelaCadastroProduto dialog = new TelaCadastroProduto();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
     }
 
     private void createUIComponents() {

@@ -41,6 +41,15 @@ public class TelaCadastroProduto extends JDialog {
 
             }
         });
+        listarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaVisualizarProdutos visualizarProdutos = new TelaVisualizarProdutos();
+                visualizarProdutos.pack();
+                visualizarProdutos.setLocationRelativeTo(null);
+                visualizarProdutos.setVisible(true);
+            }
+        });
     }
 
     private void createUIComponents() {

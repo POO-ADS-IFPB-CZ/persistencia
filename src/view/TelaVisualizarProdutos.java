@@ -6,6 +6,7 @@ import model.Produto;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -34,7 +35,9 @@ public class TelaVisualizarProdutos extends JDialog {
             table1 = new JTable();
             String titulos[] = {"Código", "Descrição", "Preço", "Validade"};
             String conteudo[][] = new String[produtos.size()][4];
-            List<Produto> produtoList = produtos.stream().toList();
+            List<Produto> produtoList = produtos.stream()
+                .sorted(Comparator.comparingInt(Produto::getId)).toList();
+
             for(int i=0; i<produtoList.size(); i++){
                 conteudo[i][0] = ""+produtoList.get(i).getId();
                 conteudo[i][1] = produtoList.get(i).getDescricao();

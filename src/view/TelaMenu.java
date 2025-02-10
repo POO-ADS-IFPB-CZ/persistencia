@@ -32,6 +32,17 @@ public class TelaMenu extends JFrame {
                 setVisible(true);
             }
         });
+        clientesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaCadastroCliente cadastroCliente = new TelaCadastroCliente();
+                dispose();
+                cadastroCliente.pack();
+                cadastroCliente.setLocationRelativeTo(null);
+                cadastroCliente.setVisible(true);
+                setVisible(true);
+            }
+        });
     }
 
     public static void main(String[] args) {

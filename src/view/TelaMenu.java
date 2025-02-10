@@ -3,6 +3,8 @@ package view;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaMenu extends JFrame {
     private JPanel contentPane;
@@ -41,6 +43,12 @@ public class TelaMenu extends JFrame {
                 cadastroCliente.setLocationRelativeTo(null);
                 cadastroCliente.setVisible(true);
                 setVisible(true);
+            }
+        });
+        vendasButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                System.out.println("Mouse entrou "+e.getX()+","+e.getY());
             }
         });
     }

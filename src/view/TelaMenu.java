@@ -1,8 +1,6 @@
 package view;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -23,27 +21,21 @@ public class TelaMenu extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         getRootPane().setDefaultButton(buttonOK);
-        produtosButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TelaCadastroProduto cadastroProduto = new TelaCadastroProduto();
-                dispose();
-                cadastroProduto.pack();
-                cadastroProduto.setLocationRelativeTo(null);
-                cadastroProduto.setVisible(true);
-                setVisible(true);
-            }
+        produtosButton.addActionListener(e -> {
+            TelaCadastroProduto cadastroProduto = new TelaCadastroProduto();
+            dispose();
+            cadastroProduto.pack();
+            cadastroProduto.setLocationRelativeTo(null);
+            cadastroProduto.setVisible(true);
+            setVisible(true);
         });
-        clientesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TelaCadastroCliente cadastroCliente = new TelaCadastroCliente();
-                dispose();
-                cadastroCliente.pack();
-                cadastroCliente.setLocationRelativeTo(null);
-                cadastroCliente.setVisible(true);
-                setVisible(true);
-            }
+        clientesButton.addActionListener(e -> {
+            TelaCadastroCliente cadastroCliente = new TelaCadastroCliente();
+            dispose();
+            cadastroCliente.pack();
+            cadastroCliente.setLocationRelativeTo(null);
+            cadastroCliente.setVisible(true);
+            setVisible(true);
         });
         vendasButton.addMouseListener(new MouseAdapter() {
             @Override

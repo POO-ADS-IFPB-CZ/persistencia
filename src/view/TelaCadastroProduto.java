@@ -78,34 +78,28 @@ public class TelaCadastroProduto extends JDialog {
                 return true;
             }
         });
-        listarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TelaVisualizarProdutos visualizarProdutos = new TelaVisualizarProdutos();
-                visualizarProdutos.pack();
-                visualizarProdutos.setLocationRelativeTo(null);
-                visualizarProdutos.setVisible(true);
-            }
+        listarButton.addActionListener(e -> {
+            TelaVisualizarProdutos visualizarProdutos = new TelaVisualizarProdutos();
+            visualizarProdutos.pack();
+            visualizarProdutos.setLocationRelativeTo(null);
+            visualizarProdutos.setVisible(true);
         });
-        buttonCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String codigoString = campoCodigo.getText();
-                int codigo = Integer.parseInt(codigoString);
-                Produto produto = new Produto(codigo, null,
-                        0, null);
-                try {
-                    if(produtoDao.removerProduto(produto)){
-                        JOptionPane.showMessageDialog(null,
-                                "Removido com sucesso");
-                    }else{
-                        JOptionPane.showMessageDialog(null,
-                                "Código não existe");
-                    }
-                } catch (IOException | ClassNotFoundException ex) {
+        buttonCancel.addActionListener(e -> {
+            String codigoString = campoCodigo.getText();
+            int codigo = Integer.parseInt(codigoString);
+            Produto produto = new Produto(codigo, null,
+                    0, null);
+            try {
+                if(produtoDao.removerProduto(produto)){
                     JOptionPane.showMessageDialog(null,
-                            "Falha na conexão com o arquivo");
+                            "Removido com sucesso");
+                }else{
+                    JOptionPane.showMessageDialog(null,
+                            "Código não existe");
                 }
+            } catch (IOException | ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null,
+                        "Falha na conexão com o arquivo");
             }
         });
     }

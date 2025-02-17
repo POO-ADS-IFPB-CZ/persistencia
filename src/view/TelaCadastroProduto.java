@@ -50,6 +50,7 @@ public class TelaCadastroProduto extends JDialog {
                             JOptionPane.showMessageDialog(null,
                                     "Salvo com sucesso");
                         }else{
+                            //Fazer atualização aqui
                             JOptionPane.showMessageDialog(null,
                                     "Código já existente");
                         }

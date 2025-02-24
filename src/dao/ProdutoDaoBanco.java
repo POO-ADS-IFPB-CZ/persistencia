@@ -19,11 +19,12 @@ public class ProdutoDaoBanco {
 
     public boolean adicionarProduto(Produto produto) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
-                "INSERT INTO produto (descricao, preco, validade) " +
-                        "VALUES (?,?,?)");
-        stmt.setString(1, produto.getDescricao());
-        stmt.setFloat(2, produto.getPreco());
-        stmt.setDate(3, Date.valueOf(produto.getValidade()));
+                "INSERT INTO produto (id, descricao, preco, validade) " +
+                        "VALUES (?,?,?,?)");
+        stmt.setInt(1, produto.getId());
+        stmt.setString(2, produto.getDescricao());
+        stmt.setFloat(3, produto.getPreco());
+        stmt.setDate(4, Date.valueOf(produto.getValidade()));
         return stmt.executeUpdate()>0;
     }
 

@@ -12,9 +12,16 @@ public class ProdutoDaoBanco implements ProdutoDao {
 
     private Connection connection;
 
-    public ProdutoDaoBanco() throws SQLException, IOException,
-            ClassNotFoundException {
-        connection = new ConnectionFactory().getConnection();
+    public ProdutoDaoBanco(){
+        try {
+            connection = new ConnectionFactory().getConnection();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public boolean adicionarProduto(Produto produto) throws SQLException {

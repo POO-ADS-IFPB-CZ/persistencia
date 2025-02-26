@@ -2,6 +2,7 @@ package view;
 
 import dao.ProdutoDao;
 import dao.ProdutoDaoArquivo;
+import dao.ProdutoDaoBanco;
 import model.Produto;
 
 import javax.swing.*;
@@ -26,7 +27,7 @@ public class TelaCadastroProduto extends JDialog {
     private ProdutoDao produtoDao;
 
     public TelaCadastroProduto() {
-        produtoDao = new ProdutoDaoArquivo();
+        produtoDao = new ProdutoDaoBanco();
         setContentPane(contentPane);
         setModal(true);
         setTitle("Cadastro de Produtos");

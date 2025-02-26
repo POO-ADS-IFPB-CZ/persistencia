@@ -10,7 +10,9 @@ public class App {
     public static void main(String[] args) {
         try {
             ProdutoDaoBanco dao = new ProdutoDaoBanco();
-            System.out.println(dao.getProdutos());
+            dao.removerProduto(new Produto(1,null,
+                    0, null));
+//            System.out.println(dao.getProdutos());
 //            dao.adicionarProduto(new Produto(1, "Arroz",
 //                    5.5f, LocalDate.of(2025,7,6)));
         } catch (SQLException e) {

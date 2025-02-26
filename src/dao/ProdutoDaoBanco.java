@@ -46,4 +46,11 @@ public class ProdutoDaoBanco {
         return produtos;
     }
 
+    public boolean removerProduto(Produto produto) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement(
+                "DELETE FROM produto WHERE id = ?");
+        stmt.setInt(1, produto.getId());
+        return stmt.executeUpdate()>0;
+    }
+
 }

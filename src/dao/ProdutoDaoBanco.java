@@ -53,4 +53,14 @@ public class ProdutoDaoBanco {
         return stmt.executeUpdate()>0;
     }
 
+    public boolean atualizar(Produto produto) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement(
+                "UPDATE produto SET descricao=?, preco=?, validade=? WHERE id=?");
+        stmt.setString(1, produto.getDescricao());
+        stmt.setFloat(2, produto.getPreco());
+        stmt.setDate(3, Date.valueOf(produto.getValidade()));
+        stmt.setInt(4, produto.getId());
+        return stmt.executeUpdate()>0;
+    }
+
 }

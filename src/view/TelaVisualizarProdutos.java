@@ -1,6 +1,6 @@
 package view;
 
-import dao.ProdutoDao;
+import dao.ProdutoDaoArquivo;
 import model.Produto;
 
 import javax.swing.*;
@@ -22,7 +22,7 @@ public class TelaVisualizarProdutos extends JDialog {
     }
 
     private void createUIComponents() {
-        ProdutoDao dao = new ProdutoDao();
+        ProdutoDaoArquivo dao = new ProdutoDaoArquivo();
         Set<Produto> produtos = null;
         try {
             produtos = dao.getProdutos();

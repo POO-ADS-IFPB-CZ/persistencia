@@ -1,6 +1,6 @@
 package view;
 
-import dao.ProdutoDao;
+import dao.ProdutoDaoArquivo;
 import model.Produto;
 
 import javax.swing.*;
@@ -21,10 +21,10 @@ public class TelaCadastroProduto extends JDialog {
     private JTextField campoPreco;
     private JButton listarButton;
     private JFormattedTextField formattedTextField1;
-    private ProdutoDao produtoDao;
+    private ProdutoDaoArquivo produtoDao;
 
     public TelaCadastroProduto() {
-        produtoDao = new ProdutoDao();
+        produtoDao = new ProdutoDaoArquivo();
         setContentPane(contentPane);
         setModal(true);
         setTitle("Cadastro de Produtos");

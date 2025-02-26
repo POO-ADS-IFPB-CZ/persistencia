@@ -1,5 +1,6 @@
 package view;
 
+import dao.ProdutoDao;
 import dao.ProdutoDaoArquivo;
 import model.Produto;
 
@@ -8,6 +9,7 @@ import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 
@@ -21,7 +23,7 @@ public class TelaCadastroProduto extends JDialog {
     private JTextField campoPreco;
     private JButton listarButton;
     private JFormattedTextField formattedTextField1;
-    private ProdutoDaoArquivo produtoDao;
+    private ProdutoDao produtoDao;
 
     public TelaCadastroProduto() {
         produtoDao = new ProdutoDaoArquivo();
@@ -60,6 +62,8 @@ public class TelaCadastroProduto extends JDialog {
                     } catch (ClassNotFoundException ex) {
                         JOptionPane.showMessageDialog(null,
                                 "Falha na conexão com arquivo");
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
                     }
 
                 }
@@ -101,6 +105,8 @@ public class TelaCadastroProduto extends JDialog {
             } catch (IOException | ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null,
                         "Falha na conexão com o arquivo");
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
             }
         });
     }

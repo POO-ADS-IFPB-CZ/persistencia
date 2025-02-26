@@ -1,11 +1,13 @@
 package view;
 
+import dao.ProdutoDao;
 import dao.ProdutoDaoArquivo;
 import model.Produto;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -22,13 +24,15 @@ public class TelaVisualizarProdutos extends JDialog {
     }
 
     private void createUIComponents() {
-        ProdutoDaoArquivo dao = new ProdutoDaoArquivo();
+        ProdutoDao dao = new ProdutoDaoArquivo();
         Set<Produto> produtos = null;
         try {
             produtos = dao.getProdutos();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         if(produtos!=null){
